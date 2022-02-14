@@ -1,7 +1,5 @@
 import Page from "../components/Page";
 
 export default function SellPage() {
-  return (
-    <p>Sell page</p>
-  );
+  return <p>Sell page</p>;
 }

@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styled from 'styled-components';
-import Nav from './Nav';
+import Link from "next/link";
+import styled from "styled-components";
+import Nav from "./Nav";
 
 const Logo = styled.h1`
   background: red;
@@ -32,14 +32,14 @@ const HeaderStyles = styled.header`
     display: grid;
     grid-template-columns: auto 1fr;
   }
-`
+`;
 
 export default function Header() {
   return (
     <HeaderStyles>
       <div className="bar">
         <Logo>
-        <Link href="/">Sick fits</Link>
+          <Link href="/">Sick fits</Link>
         </Logo>
       </div>
       <div className="sub-bar">
