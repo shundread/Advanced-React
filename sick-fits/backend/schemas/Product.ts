@@ -21,7 +21,7 @@ export const Product = list({
       options: [
         { label: "Draft", value: "DRAFT" },
         { label: "Available", value: "AVAILABLE" },
-        { label: "Unavailable", value: "UNAVAILABLE" }
+        { label: "Unavailable", value: "UNAVAILABLE" },
       ],
       defaultValue: "DRAFT",
       ui: {
@@ -30,6 +30,5 @@ export const Product = list({
       },
     }),
     price: integer(),
-    // TODO: Photo
-  }
+  },
 });

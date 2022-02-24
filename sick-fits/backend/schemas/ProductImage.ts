@@ -5,11 +5,11 @@ export const ProductImage = list({
   fields: {
     src: text({ isRequired: true }),
     altText: text(),
-    product: relationship({ ref: 'Product.photo' }),
+    product: relationship({ ref: "Product.photo" }),
   },
   ui: {
     listView: {
-      initialColumns: ["src", "altText", "product"]
-    }
-  }
+      initialColumns: ["src", "altText", "product"],
+    },
+  },
 });
