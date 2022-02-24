@@ -20,7 +20,7 @@ const Logo = styled.h1`
 
 const HeaderStyles = styled.header`
   .bar {
-    align-items: center;
+    align-items: stretch;
     border-bottom: 10px solid var(--black, black);
     display: grid;
     grid-template-columns: auto 1fr;
@@ -41,11 +41,11 @@ export default function Header() {
         <Logo>
           <Link href="/">Sick fits</Link>
         </Logo>
+        <Nav />
       </div>
       <div className="sub-bar">
         <p>Search</p>
       </div>
-      <Nav />
     </HeaderStyles>
   );
 }
