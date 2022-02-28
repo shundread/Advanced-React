@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import styled from "styled-components";
+import { ErrorMessage } from "./ErrorMessage";
 import { LoadingDisplay } from "./LoadingDisplay";
 import { Product } from "./Product";
 
@@ -30,7 +31,7 @@ export function Products() {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY);
 
   if (loading) return <LoadingDisplay />;
-  if (error) return <p>{error}</p>;
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <div>
