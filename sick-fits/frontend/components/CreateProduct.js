@@ -4,6 +4,7 @@ import { useForm } from "../lib/useForm";
 import { Form } from "./styles/Form";
 
 import { ErrorMessage } from "./ErrorMessage";
+import { ALL_PRODUCTS_QUERY } from "./Products";
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -18,12 +19,7 @@ const CREATE_PRODUCT_MUTATION = gql`
         description: $description
         price: $price
         status: "AVAILABLE"
-        photo: {
-          create: {
-            src: $image,
-            altText: $name
-          }
-        }
+        photo: { create: { src: $image, altText: $name } }
       }
     ) {
       id
@@ -32,7 +28,7 @@ const CREATE_PRODUCT_MUTATION = gql`
       description
     }
   }
-`
+`;
 
 export function CreateProduct() {
   const { inputs, clearForm, handleChange, resetForm } = useForm({
@@ -42,16 +38,19 @@ export function CreateProduct() {
     description: "Bar",
   });
 
-  const [createProduct, { loading, error, data }] = useMutation(CREATE_PRODUCT_MUTATION, {
-    variables: inputs
-  });
+  const [createProduct, { loading, error, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      variables: inputs,
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
+    }
+  );
 
   async function handleSubmit(event) {
     event.preventDefault();
     await createProduct();
     if (error) return;
     clearForm();
-
   }
 
   return (
