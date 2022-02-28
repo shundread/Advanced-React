@@ -34,6 +34,6 @@ export function useForm(initialState = {}) {
 function parseEventValue(event) {
   const { type, value } = event.target;
   if (type === "number") return parseInt(value);
-  if (type === "file") return event.target.files;
+  if (type === "file") return event.target.files[0]?.name || ""; // event.target.files;
   return event.target.value;
 }
