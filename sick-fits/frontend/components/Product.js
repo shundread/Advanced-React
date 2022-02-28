@@ -12,6 +12,18 @@ export function Product({ product }) {
         <Link href={`/product/${product.id}`}>{product.name}</Link>
       </Title>
       <PriceTag>{formatMoney(product.price)}</PriceTag>
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: "update",
+            query: {
+              id: product.id,
+            },
+          }}
+        >
+          Edit
+        </Link>
+      </div>
     </ItemStyles>
   );
   // TODO: Add buttons to edit and delete item

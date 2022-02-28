@@ -20,8 +20,8 @@ export const SINGLE_ITEM_QUERY = gql`
 `;
 
 const ProductStyles = styled.div`
-align-items: top;
-display: grid;
+  align-items: top;
+  display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
   grid-gap: 2rem;
