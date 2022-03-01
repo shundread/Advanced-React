@@ -1,4 +1,3 @@
-import { number } from "prop-types";
 import { useEffect, useState } from "react";
 
 export function useForm(initialState = {}) {
@@ -34,8 +33,7 @@ export function useForm(initialState = {}) {
 }
 
 function parseEventValue(event) {
-  const { type, value } = event.target;
-  if (type === "number") return parseInt(value);
-  if (type === "file") return event.target.files[0]?.name || ""; // event.target.files;
+  if (event.target.type === "number") return parseInt(event.target.value);
+  if (event.target.type === "file") return event.target.files[0]?.name || ""; // event.target.files;
   return event.target.value;
 }
