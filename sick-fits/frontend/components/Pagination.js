@@ -22,6 +22,7 @@ export function Pagination({ page }) {
   const itemCount = data._allProductsMeta.count;
   const pageCount = Math.ceil(itemCount / perPage);
 
+  // TODO: actually disable the links - they can still be tabbed to and "entered" into
   return (
     <PaginationStyles>
       <Head>
