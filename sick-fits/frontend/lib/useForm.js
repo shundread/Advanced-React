@@ -1,9 +1,11 @@
 import { number } from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useForm(initialState = {}) {
   // Create a state object for our inputs
   const [inputs, setInputs] = useState(initialState);
+
+  useEffect(() => setInputs(initialState), [initialState]);
 
   function handleChange(event) {
     setInputs({
