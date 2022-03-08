@@ -34,6 +34,13 @@ const UPDATE_PRODUCT_MUTATION = gql`
   }
 `;
 
+const EmptyProduct = {
+  image: "",
+  name: "",
+  price: 0,
+  description: "",
+};
+
 export function UpdateProduct({ id }) {
   // 1. We need to get the existing product
   const queryResponse = useQuery(SINGLE_PRODUCT_QUERY, { variables: { id } });

@@ -29,11 +29,12 @@ const ProductsList = styled.div`
 `;
 
 export function Products({ page }) {
-  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY,
-    { variables: {
+  const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY, {
+    variables: {
       skip: (page - 1) * perPage,
-      first: perPage
-    }});
+      first: perPage,
+    },
+  });
 
   if (loading) return <LoadingDisplay />;
   if (error) return <ErrorMessage error={error} />;
