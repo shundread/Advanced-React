@@ -6,6 +6,7 @@ import Router from "next/router";
 
 import { ErrorMessage } from "./ErrorMessage";
 import { ALL_PRODUCTS_QUERY } from "./Products";
+import { PAGINATION_QUERY } from "./Pagination";
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -46,7 +47,10 @@ export function CreateProduct() {
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
-      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
+      refetchQueries: [
+        { query: ALL_PRODUCTS_QUERY },
+        { query: PAGINATION_QUERY },
+      ],
     }
   );
 
