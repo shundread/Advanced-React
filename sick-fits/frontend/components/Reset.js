@@ -4,9 +4,17 @@ import { Form } from "./styles/Form";
 import gql from "graphql-tag";
 import { ErrorMessage } from "./ErrorMessage";
 
-const REQUEST_RESET_PASSWORD_MUTATION = gql`
-  mutation REQUEST_RESET_PASSWORD_MUTATION($email: String!) {
-    sendUserPasswordResetLink(email: $email) {
+const RESET_PASSWORD_MUTATION = gql`
+  mutation RESET_PASSWORD_MUTATION(
+    $email: String!
+    $password: String!
+    $token: String!
+  ) {
+    redeemUserPasswordResetToken(
+      email: $email
+      password: $password
+      token: $token
+    ) {
       code
       message
     }
@@ -15,15 +23,20 @@ const REQUEST_RESET_PASSWORD_MUTATION = gql`
 
 const DefaultState = {
   email: "",
+  password: "",
 };
 
-export function RequestReset() {
+export function Reset({ token }) {
   const { inputs, handleChange, resetForm } = useForm(DefaultState);
 
-  const [requestReset, { data, error, loading }] = useMutation(
-    REQUEST_RESET_PASSWORD_MUTATION,
+  const [reset, { data, error, loading }] = useMutation(
+    RESET_PASSWORD_MUTATION,
     {
-      variables: inputs,
+      variables: {
+        email: inputs.email,
+        password: inputs.password,
+        token,
+      },
       // refetchQueries: [{ query: CURRENT_USER_QUERY }], <- The operation creates the user but does not sign it
     }
   );
@@ -32,20 +45,20 @@ export function RequestReset() {
     event.preventDefault();
 
     // Send the email, name and password to the graphqlAPI
-    const result = await requestReset().catch(console.error);
+    const result = await reset().catch(console.error);
     resetForm();
   }
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
-      <h2>Forgot Your Password?</h2>
+      <h2>Reset Your Password</h2>
       <ErrorMessage error={error /* GraphQL error */} />
       <ErrorMessage
-        error={data?.sendUserPasswordResetLink /* Authentication error */}
+        error={data?.redeemUserPasswordResetToken /* Authentication error */}
       />
       <fieldset disabled={loading}>
-        {data?.sendUserPasswordResetLink === null && !error && (
-          <p>Success! Check your email for a link!</p>
+        {data?.redeemUserPasswordResetToken === null && !error && (
+          <p>Success! You can now sign in.</p>
         )}
         <label htmlFor="email">
           Email
@@ -55,6 +68,17 @@ export function RequestReset() {
             placeholder="Your Email Address"
             autoComplete="email"
             value={inputs.email}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="password">
+          New Password
+          <input
+            type="password"
+            name="password"
+            placeholder="New Password"
+            autoComplete="password"
+            value={inputs.password}
             onChange={handleChange}
           />
         </label>
