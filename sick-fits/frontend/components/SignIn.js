@@ -5,8 +5,8 @@ import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
 import { ErrorMessage } from "./ErrorMessage";
 
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+const SIGN_IN_MUTATION = gql`
+  mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
     authenticateUserWithPassword(email: $email, password: $password) {
       ... on UserAuthenticationWithPasswordSuccess {
         sessionToken
@@ -32,7 +32,7 @@ const DefaultState = {
 export function SignIn() {
   const { inputs, handleChange, resetForm } = useForm(DefaultState);
 
-  const [signin, { data, error, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signin, { data, error, loading }] = useMutation(SIGN_IN_MUTATION, {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
