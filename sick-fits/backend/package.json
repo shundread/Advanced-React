@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "keystone-next",
-    "seed-data": "keystone-next --seed-data"
+    "seed-data": "keystone-next --seed-data",
+    "prettify": "prettier -w lib && prettier -w schemas && prettier -w seed-data # TODO prettier -w mutations"
   },
   "eslintConfig": {
     "extends": "wesbos/typescript.js",
