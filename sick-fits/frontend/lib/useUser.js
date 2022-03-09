@@ -7,13 +7,12 @@ export const CURRENT_USER_QUERY = gql`
         id
         email
         name
-        #TOD: Query the cart once we have it
+        #TODO: Query the cart once we have it
       }
     }
   }
 `;
 
- 
 export function useUser() {
   const { data } = useQuery(CURRENT_USER_QUERY);
 

@@ -1,5 +1,9 @@
-import Page from "../components/Page";
+import { SignIn } from "../components/SignIn";
 
 export default function SignInPage() {
-  return <p>Sign in page</p>;
+  return (
+    <div>
+      <SignIn />
+    </div>
+  );
 }
