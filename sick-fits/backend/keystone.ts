@@ -6,6 +6,7 @@ import {
   statelessSessions,
 } from "@keystone-next/keystone/session";
 
+import { CartItem } from "./schemas/CartItem";
 import { User } from "./schemas/User";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
@@ -59,6 +60,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem
     }),
     ui: {
       // Show the UI only for people that pass this test
