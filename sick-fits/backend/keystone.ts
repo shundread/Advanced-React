@@ -12,6 +12,7 @@ import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
+import { extendGraphqlSchema } from "./mutations";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost:27017/sick-fits-keystone";
@@ -56,6 +57,7 @@ export default withAuth(
         }
       },
     },
+    extendGraphqlSchema, 
     lists: createSchema({
       User,
       Product,
