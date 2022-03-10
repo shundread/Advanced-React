@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CartStyles = styled.div`
+export const CartStyles = styled.div`
   padding: 20px;
   position: relative;
   background: white;
@@ -43,5 +43,3 @@ const CartStyles = styled.div`
     overflow: scroll;
   }
 `;
-
-export default CartStyles;
