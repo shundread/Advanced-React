@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { formatMoney } from "../lib/formatMoney";
+import { RemoveFromCart } from "./RemoveFromCart";
 
 const CartItemStyles = styled.li`
   border-bottom: 1px solid var(--lightGrey);
@@ -38,6 +39,7 @@ export function CartItem({ cartItem }) {
           </em>
         </p>
       </div>
+      <RemoveFromCart id={cartItem.id} />
     </CartItemStyles>
   );
 }
