@@ -21,11 +21,26 @@ const BigButton = styled.button`
   }
 `;
 
+function update(cache, payload) {
+  cache.evict(cache.identify(payload.data.deleteCartItem));
+}
+
 export function RemoveFromCart({ id }) {
   const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
     variables: { id },
     // We will do fancy stuff so we'll manually evict from cache and skip this:
     // refetchQueries: [{ query: CURRENT_USER_QUERY }]
+
+    // The fancy stuff v
+    update,
+
+    // TODO figure out how to make this work:
+    // optimisticResponse: {
+    //   deleteCartItem: {
+    //     id,
+    //     __typename: "CartItem"
+    //   }
+    // }
   });
 
   const handleClick = useCallback(() => {
