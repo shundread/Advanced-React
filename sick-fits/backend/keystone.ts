@@ -8,6 +8,8 @@ import {
 
 import { CartItem } from "./schemas/CartItem";
 import { User } from "./schemas/User";
+import { Order } from "./schemas/Order";
+import { OrderItem } from "./schemas/OrderItem";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
@@ -33,8 +35,8 @@ const { withAuth } = createAuth({
   passwordResetLink: {
     async sendToken(args) {
       await sendPasswordResetEmail({
-       resetToken: args.token,
-       to: args.identity
+        resetToken: args.token,
+        to: args.identity,
       });
     },
   },
@@ -57,12 +59,14 @@ export default withAuth(
         }
       },
     },
-    extendGraphqlSchema, 
+    extendGraphqlSchema,
     lists: createSchema({
       User,
       Product,
       ProductImage,
-      CartItem
+      CartItem,
+      Order,
+      OrderItem,
     }),
     ui: {
       // Show the UI only for people that pass this test
