@@ -7,7 +7,7 @@ export const Order = list({
   fields: {
     label: virtual({
       graphQLReturnType: "String",
-      resolver: function (entry) {
+      resolver(entry) {
         return `${entry.user.email} - ${formatMoney(entry.total)}`;
       },
     }),
