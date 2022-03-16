@@ -54,7 +54,7 @@ export async function checkout(
   // 2. Calculate the total price for the order
   const amount = calculateCartTotalPrice(user.cart);
   const cartItems = user.cart.filter((cartItem) => cartItem.product);
-  console.log(`Amount is ${formatMoney(amount)}`);
+  console.log(`\nAmount is ${formatMoney(amount)}`);
 
   // 3. Create the charge with the stripe library
   const charge = await StripeConfig.paymentIntents
@@ -68,6 +68,7 @@ export async function checkout(
       console.error("The error is", error);
       throw new Error(error.message);
     });
+  console.log("ņCharge is:\n", charge);
 
   // 4. Convert the CartItems to OrderItems
   // 5. Create the order and return it
