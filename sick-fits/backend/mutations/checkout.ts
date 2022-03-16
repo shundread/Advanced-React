@@ -38,11 +38,10 @@ export async function checkout(
           id
           name
           price
-          description {
-            photo {
-              id
-              src
-            }
+          description
+          photo {
+            id
+            src
           }
         }
       }
@@ -53,7 +52,6 @@ export async function checkout(
 
   // 2. Calculate the total price for the order
   const amount = calculateCartTotalPrice(user.cart);
-  const cartItems = user.cart.filter((cartItem) => cartItem.product);
   console.log(`\nAmount is ${formatMoney(amount)}`);
 
   // 3. Create the charge with the stripe library
@@ -68,10 +66,34 @@ export async function checkout(
       console.error("The error is", error);
       throw new Error(error.message);
     });
-  console.log("ņCharge is:\n", charge);
+  console.log("Charge is:\n", charge);
+  // TODO HANDLE ERRRORS
 
   // 4. Convert the CartItems to OrderItems
+  const cartItems = user.cart.filter((cartItem) => cartItem.product);
+  const orderItems = cartItems.map((cartItem) => ({
+    name: cartItem.product.name,
+    description: cartItem.product.description,
+    price: cartItem.product.price,
+    quantity: cartItem.quantity,
+    photo: { connect: { id: cartItem.product.photo.id } },
+  }));
+
   // 5. Create the order and return it
+  const order = await context.lists.Order.createOne({
+    data: {
+      total: charge.amount,
+      charge: charge.id,
+      items: { create: orderItems },
+      user: { connect: { id: userId } },
+    },
+  });
+
+  // 6. Clean up any old cart item
+  const cartItemIds = user.cart.map((cartItem) => cartItem.id);
+  await context.lists.CartItem.deleteMany({ ids: cartItemIds });
+
+  return order;
 }
 
 function calculateCartTotalPrice(cartItems) {

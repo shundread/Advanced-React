@@ -9,7 +9,7 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { SickButton } from "./styles/SickButton";
 import { ErrorMessage } from "./ErrorMessage";
@@ -56,7 +56,9 @@ function CheckoutForm() {
     CREATE_ORDER_MUTATION
   );
 
-  const handleSubmit = useCallback(async (e) => {
+  // This wasn't working as a callback somehow, but maybe React was just
+  // throwing a confusing error?
+  async function handleSubmit(e) {
     // 1. Stop the form from submitting and turn the loader on
     e.preventDefault();
     console.log("We gotta deal with the payment now!");
@@ -70,11 +72,11 @@ function CheckoutForm() {
       type: "card",
       card: elements.getElement(CardElement),
     });
-    console.error("Error is", error);
     console.log("Payment method", paymentMethod);
 
     // 4. Handle any errors from stripe
     if (error) {
+      console.error("Error is", error);
       nProgress.done();
       setError(error);
       setLoading(false);
@@ -89,13 +91,14 @@ function CheckoutForm() {
     });
 
     console.log("Finished with the order");
-    console.log(order);
+    console.log(orderResult);
+
     // 6. Change the page to view the order
     // 7. Close the cart
     // 8. Turn the loader off
-    setLoading(false);
     nProgress.done();
-  }, []);
+    setLoading(false);
+  }
 
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
