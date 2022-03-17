@@ -13,6 +13,9 @@ import { useState } from "react";
 
 import { SickButton } from "./styles/SickButton";
 import { ErrorMessage } from "./ErrorMessage";
+import { useRouter } from "next/router";
+import { useCart } from "../lib/cartState";
+import { CURRENT_USER_QUERY } from "../lib/useUser";
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -52,8 +55,11 @@ function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const { closeCart } = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    { refetchQueries: [CURRENT_USER_QUERY] }
   );
 
   // This wasn't working as a callback somehow, but maybe React was just
@@ -94,7 +100,14 @@ function CheckoutForm() {
     console.log(orderResult);
 
     // 6. Change the page to view the order
+    router.push({
+      pathname: "/order",
+      query: { id: orderResult.data.checkout.id },
+    });
+
     // 7. Close the cart
+    closeCart();
+
     // 8. Turn the loader off
     nProgress.done();
     setLoading(false);

@@ -2,6 +2,8 @@ import { integer, relationship, text, virtual } from "@keystone-next/fields";
 import { list } from "@keystone-next/keystone/schema";
 import formatMoney from "../lib/formatMoney";
 
+// XXX: tbh I'd also add a timestamp if keystone doesn't provide it out of the box
+
 export const Order = list({
   fields: {
     label: virtual({

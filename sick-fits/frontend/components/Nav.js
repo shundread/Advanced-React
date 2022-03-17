@@ -30,5 +30,8 @@ export default function Nav() {
 }
 
 function cartItemCount(cart) {
-  return cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0);
+  return cart.reduce(
+    (tally, cartItem) => tally + (cartItem.product ? cartItem.quantity : 0),
+    0
+  );
 }
