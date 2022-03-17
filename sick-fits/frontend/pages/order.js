@@ -1,9 +1,17 @@
-import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import Head from "next/head";
+
+import { useQuery } from "@apollo/client";
+
 import { ErrorMessage } from "../components/ErrorMessage";
 import { OrderStyles } from "../components/styles/OrderStyles";
 import { formatMoney } from "../lib/formatMoney";
+
+// tbh this should be:
+//
+// export default OrderPage({ query }) {
+//  return <Order id={query.id} />;
+// }
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
