@@ -1,10 +1,17 @@
 import { integer, relationship, text, virtual } from "@keystone-next/fields";
 import { list } from "@keystone-next/keystone/schema";
+import { isSignedIn, rules } from "../access";
 import formatMoney from "../lib/formatMoney";
 
 // XXX: tbh I'd also add a timestamp if keystone doesn't provide it out of the box
 
 export const Order = list({
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: () => false,
+    delete: () => false,
+  },
   fields: {
     label: virtual({
       graphQLReturnType: "String",
