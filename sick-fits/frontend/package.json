@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start -p 7777",
     "test": "NODE_ENV=test jest --watch",
-    "prettify": "prettier -w components && prettier -w lib && prettier -w pages"
+    "prettify": "prettier -w components && prettier -w lib && prettier -w pages && prettier -w __tests__"
   },
   "author": "",
   "license": "ISC",
