@@ -12,9 +12,7 @@ const fakeItem = () => ({
   photo: {
     id: "abc123",
     altText: "dogs are best",
-    image: {
-      publicUrlTransformed: "dog.jpg",
-    },
+    src: "dog.jpg",
   },
   name: "dogs are best",
   description: "dogs",
