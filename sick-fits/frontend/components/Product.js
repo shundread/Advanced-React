@@ -33,5 +33,4 @@ export function Product({ product }) {
       </RenderIfSignedIn>
     </ItemStyles>
   );
-  // TODO: Add buttons to edit and delete item
 }
