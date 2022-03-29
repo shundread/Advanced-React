@@ -43,7 +43,7 @@ export function SingleProduct({ id }) {
   const { Product } = data;
 
   return (
-    <ProductStyles>
+    <ProductStyles data-testid="single-product">
       <Head>
         <title>Sick Fits | {Product.name}</title>
       </Head>

@@ -31,7 +31,7 @@ describe("<Product />", () => {
   });
 
   it("Renders the image properly", () => {
-    const { container } = render(
+    render(
       <MockedProvider>
         <Product product={product} />
       </MockedProvider>
@@ -40,5 +40,5 @@ describe("<Product />", () => {
     // Grab the image
     const img = screen.getByAltText(product.name);
     expect(img).toBeInTheDocument();
-  })
+  });
 });
