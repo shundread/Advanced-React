@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CartCount /> Matches the snapshot 1`] = `
+<div>
+  <span
+    class="CartCount__AnimationStyles-sc-xxvp4g-1 bjfODT"
+  >
+    <div>
+      <div
+        class="CartCount__Dot-sc-xxvp4g-0 dgpiUM count"
+      >
+        8
+      </div>
+    </div>
+  </span>
+</div>
+`;
