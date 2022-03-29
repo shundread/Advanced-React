@@ -5,7 +5,7 @@ import { CartCount } from "./CartCount";
 import { SignOut } from "./SignOut";
 import { NavStyles } from "./styles/NavStyles";
 
-export default function Nav() {
+export function Nav() {
   const user = useUser();
   const { openCart } = useCart();
   return (
