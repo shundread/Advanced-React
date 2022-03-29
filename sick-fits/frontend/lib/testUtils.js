@@ -1,5 +1,13 @@
+import { screen } from "@testing-library/react";
 import casual from "casual";
 import { PAGINATION_QUERY } from "../components/Pagination";
+
+// Compact link tester
+export async function expectLink({ container, url, text }) {
+  expect(container).toHaveTextContent(text);
+  const link = screen.getByText(text);
+  expect(link).toHaveAttribute("href", url);
+}
 
 // seed it so we get consistent results
 casual.seed(777);

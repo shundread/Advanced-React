@@ -1,8 +1,8 @@
-import { findByText, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MockedProvider } from "@apollo/react-testing";
 import { Nav } from "../components/Nav";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
-import { fakeCartItem, fakeUser } from "../lib/testUtils";
+import { expectLink, fakeCartItem, fakeUser } from "../lib/testUtils";
 import { CartStateProvider } from "../lib/cartState";
 
 // Make some mocks for being logged out, logged in and logged in with cart items
@@ -20,12 +20,6 @@ const SignedInMocks = [
     result: { data: { authenticatedItem: fakeUser() } },
   },
 ];
-
-function expectLink({ container, url, text }) {
-  expect(container).toHaveTextContent(text);
-  const link = screen.getByText(text);
-  expect(link).toHaveAttribute("href", url);
-}
 
 const SignedInWithCartItemsMocks = [
   {

@@ -24,7 +24,7 @@ export function Pagination({ page }) {
 
   // TODO: actually disable the links - they can still be tabbed to and "entered" into
   return (
-    <PaginationStyles>
+    <PaginationStyles data-testid="pagination">
       <Head>
         <title>
           Sick fits - Page {page} of {pageCount}
