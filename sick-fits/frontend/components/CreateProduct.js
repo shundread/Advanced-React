@@ -8,7 +8,7 @@ import { ErrorMessage } from "./ErrorMessage";
 import { ALL_PRODUCTS_QUERY } from "./Products";
 import { PAGINATION_QUERY } from "./Pagination";
 
-const CREATE_PRODUCT_MUTATION = gql`
+export const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
     $name: String!
     $description: String!
@@ -34,9 +34,9 @@ const CREATE_PRODUCT_MUTATION = gql`
 
 const DefaultProduct = {
   image: "",
-  name: "Foo",
-  price: 50,
-  description: "Bar",
+  name: "",
+  price: 0,
+  description: "",
 };
 
 export function CreateProduct() {
