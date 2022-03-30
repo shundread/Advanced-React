@@ -4,7 +4,7 @@ import { Form } from "./styles/Form";
 import gql from "graphql-tag";
 import { ErrorMessage } from "./ErrorMessage";
 
-const REQUEST_RESET_PASSWORD_MUTATION = gql`
+export const REQUEST_RESET_PASSWORD_MUTATION = gql`
   mutation REQUEST_RESET_PASSWORD_MUTATION($email: String!) {
     sendUserPasswordResetLink(email: $email) {
       code

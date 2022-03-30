@@ -32,6 +32,7 @@ const mocks = [
   },
 
   // Current user mock
+  // Not needed because we're not refetching the queries
   /*
   {
     request: {
@@ -57,7 +58,7 @@ describe("<SignUp />", () => {
   });
 
   it("Calls the mutation properly", async () => {
-    const { container, debug } = render(
+    const { container } = render(
       <MockedProvider mocks={mocks}>
         <SignUp />
       </MockedProvider>
@@ -79,6 +80,5 @@ describe("<SignUp />", () => {
     await screen.findByText(
       `Signed up with ${MockedUser.email} - Please go ahead and sign in`
     );
-    debug();
   });
 });

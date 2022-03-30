@@ -34,7 +34,6 @@ export function SignUp() {
 
     // Send the email, name and password to the graphqlAPI
     const result = await signup().catch(console.error);
-    console.log("Result is", result);
     resetForm();
   }
 
