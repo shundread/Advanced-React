@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
 import { ErrorMessage } from "./ErrorMessage";
 
-const SIGN_IN_MUTATION = gql`
+export const SIGN_UP_MUTATION = gql`
   mutation SIGN_UP_USER($email: String!, $name: String!, $password: String!) {
     createUser(data: { email: $email, name: $name, password: $password }) {
       id
@@ -24,9 +24,9 @@ const DefaultState = {
 export function SignUp() {
   const { inputs, handleChange, resetForm } = useForm(DefaultState);
 
-  const [signup, { data, error, loading }] = useMutation(SIGN_IN_MUTATION, {
+  const [signup, { data, error, loading }] = useMutation(SIGN_UP_MUTATION, {
     variables: inputs,
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }], <- The operation creates the user but does not sign it
+    // refetchQueries: [{ query: CURRENT_USER_QUERY }], // <- The operation creates the user but does not sign it
   });
 
   async function handleSubmit(event) {
